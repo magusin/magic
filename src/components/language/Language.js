@@ -1,44 +1,35 @@
-import React, {
-    useState, useEffect,
-  } from 'react';
+import "./language.css"
 
-  const Language = () => {
-    // useState
-    const [translatedCards, setTranslatedCards] = useState([]);
-    //url API
-    const APIurl = 'https://api.magicthegathering.io/v1/cards';
-  // useEffect
-  useEffect(() => fetch(APIurl).then((res) => res.json())
-    .then((data) => {
-      const tcs = data.cards.map((c) => {
-        const tc = JSON.parse(JSON.stringify(c));
-        if (c.foreignNames) {
-          tc.name = c.foreignNames[1].name;
-          tc.imageUrl = c.foreignNames[1].imageUrl;
-        }
-        return tc;
-      });
-      setTranslatedCards(tcs);
-    }),
-  []);
+const Language = ({ setLanguage }) => {
 
-  var lang = [];
-  for (var i = 0; i < 6; i++) {
-    lang.push(<div class="col">
-       <div class="p-3 border bg-light">Row column</div>
-     </div>)
-  }
+  var countryList = [
+    <img className="flag" alt="de" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"/>,
+    <img className="flag" alt="es" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"/>,
+    <img className="flag" alt="fr" src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg"/>
+  ];
 
   return (
-    <div class="container">
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    { lang }
-  </div>
-</div>
+    <div className="container">
+      <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {[...Array(9)].map((x, i) => (
+          <div className="col">
+            <div
+              onClick={() => setLanguage(i)}
+              className="p-3 border bg-light"
+            >
+              {countryList[i]}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
+};
 
-  };
-
-
-
-  export default Language;
+export default Language;
