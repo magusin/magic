@@ -1,14 +1,15 @@
 import React, {
-  Component, useState, useEffect, useDebugValue,
+  useState, useEffect,
 } from 'react';
-import ReactDOM from 'react-dom';
+
 import { Header } from './components';
+import { Language } from './components';
 
 import './App.css';
 
 const App = () => {
   // useState
-  const [cards, setCards] = useState([]);
+  const [data, setCards] = useState([]);
   const [translatedCards, setTranslatedCards] = useState([]);
   // apiurl
   const APIurl = 'https://api.magicthegathering.io/v1/cards';
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <div className="App ">
       <Header />
+      <Language />
       <div>
         {(translatedCards || []).map((item) => (
           <div>
