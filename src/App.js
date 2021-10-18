@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Header, Language } from "./components";
 
 import "./App.css";
-import "./function"
+import { callSets } from "./function"
 
 const fetchCards = async () => {
   const APIurl = "https://api.magicthegathering.io/v1/cards";
@@ -33,6 +33,7 @@ const App = () => {
 
   useEffect(() => {
     fetchCards().then((cards) => setCards(cards));
+    callSets().then(data => setSets(data.sets));
   }, []);
 
   useEffect(() => {
@@ -50,13 +51,6 @@ const App = () => {
       });
     setTranslatedCards(tcs);
   }, [cards, language, page]);
-
-  useEffect(() => {
-    return fetch("https://api.magicthegathering.io/v1/sets")
-    .then(res => res.json())
-    .then(data => setSets(data.sets))
-    
-  })
 
 
   return (
