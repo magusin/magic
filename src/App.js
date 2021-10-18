@@ -4,6 +4,22 @@ import { Header, Language } from "./components";
 
 import "./App.css";
 
+const fetchCards = async () => {
+  const APIurl = "https://api.magicthegathering.io/v1/cards";
+  let tabl = [];
+  for (let i = 1; i < 10; i++) {
+    let newCards = await fetch(APIurl + "?page=" + i + "&pageSize=100")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.cards);
+        return data.cards;
+      });
+    tabl = tabl.concat(newCards);
+  }
+  console.log(tabl);
+  return tabl;
+}
+
 const App = () => {
   // useState
   const [cards, setCards] = useState([]);
@@ -15,23 +31,8 @@ const App = () => {
   const APIurl = "https://api.magicthegathering.io/v1/cards";
   //useEffect
 
-  useEffect( () => {
-    let tabl = []
-     fetch(APIurl + "?page=1&pageSize=100")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data.cards)
-      tabl = tabl.concat(data.cards);
-      fetch(APIurl + "?page=2&pageSize=100")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.cards)
-        tabl = tabl.concat(data.cards);
-        console.log(tabl)
-        setCards(tabl)
-      });
-    });
-    
+  useEffect(() => {
+    fetchCards().then(cards => setCards(cards));
   }, []);
 
   useEffect(() => {
