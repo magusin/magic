@@ -3,20 +3,21 @@ import React, { useState, useEffect } from "react";
 import { Header, Language } from "./components";
 
 import "./App.css";
+import "./function"
 
 const fetchCards = async () => {
   const APIurl = "https://api.magicthegathering.io/v1/cards";
-  let tabl = []
-  for(let i=0; i<10; i++) {
-  await fetch(APIurl + "?page="+i+"&pageSize=100")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data.cards)
-      tabl = tabl.concat(data.cards);
-    });
+  let tabl = [];
+  for (let i = 0; i < 10; i++) {
+    await fetch(APIurl + "?page=" + i + "&pageSize=100")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.cards);
+        tabl = tabl.concat(data.cards);
+      });
   }
   return tabl;
-}
+};
 
 const App = () => {
   // useState
@@ -24,13 +25,14 @@ const App = () => {
   const [translatedCards, setTranslatedCards] = useState([]);
   const [language, setLanguage] = useState(2);
   const [page, setPage] = useState(1);
+  const [sets, setSets] = useState([]);
   // apiurl
-  // const [downloadPage, setDownloadPage ] =useState(1); 
+  // const [downloadPage, setDownloadPage ] =useState(1);
   const APIurl = "https://api.magicthegathering.io/v1/cards";
   //useEffect
 
-  useEffect( () => {
-    fetchCards().then(cards => setCards(cards));
+  useEffect(() => {
+    fetchCards().then((cards) => setCards(cards));
   }, []);
 
   useEffect(() => {
@@ -49,10 +51,23 @@ const App = () => {
     setTranslatedCards(tcs);
   }, [cards, language, page]);
 
+  useEffect(() => {
+    return fetch("https://api.magicthegathering.io/v1/sets")
+    .then(res => res.json())
+    .then(data => setSets(data.sets))
+    
+  })
+
+
   return (
     <div className="App ">
       <Header />
       <Language setLanguage={setLanguage} language={language} />
+<div>
+{sets.map((item) => (
+  <button>{ item.name }</button>
+  ))}
+</div>
       <div class="d-flex flex-wrap align-items-end">
         {(translatedCards || []).map((item) => (
           <div className="p-2 card">
