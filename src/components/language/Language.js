@@ -19,13 +19,13 @@ const Language = ({ setLanguage, language }) => {
   return (
     <div className="container">
       <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        {[...Array(9)].map((x, i) => (
+        {[...Array(9)].map((flag, index) => (
           <div className="col">
             <div
-              onClick={() => {setLanguage(i)}}
-              className={ (i === language) ? "p-3 border active" : "p-3 border bg-light" }
+              onClick={() => {setLanguage(index)}}
+              className={ (index === language) ? "p-3 border active" : "p-3 border bg-light" }
             >
-              {countryList[i]}
+              {countryList[index]}
             </div>
           </div>
         ))}
