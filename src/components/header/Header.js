@@ -8,7 +8,10 @@ export default class Header extends Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav">
           <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Accueil</Link>
+          </li>
+          <li>
+          <Link to="/home">Home</Link>
           </li>
           <li>
           <Link to="/sets">Extension</Link>
