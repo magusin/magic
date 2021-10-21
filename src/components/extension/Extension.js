@@ -1,11 +1,16 @@
+
+
 const Extension = ({ sets, setExtension }) => {
   console.log(sets);
   return (
-    <div >
+    
+  <select class="selectpicker" data-live-search="true">
       {sets.map((item) => (
-        <button onClick={() => setExtension(item.name)} key={item.name}>{item.name}</button>
+        <option 
+        data-tokens={item.name}>{item.name}</option>
       ))}
-    </div>
+       </select>
+       
   );
 };
 
