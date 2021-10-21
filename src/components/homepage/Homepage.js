@@ -6,10 +6,11 @@ const Homepage = ({
   setLanguage,
   page,
   setPage,
+  availableLanguages
 }) => {
   return (
     <div>
-      <Language setLanguage={setLanguage} language={language} />
+      <Language setLanguage={setLanguage} language={language} availableLanguages={availableLanguages}/>
       <div className="d-flex flex-wrap align-items-end">
         {(translatedCards || []).map((item) => (
           <div key={item.name} className="p-2 card">

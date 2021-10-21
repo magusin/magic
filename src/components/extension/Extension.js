@@ -1,9 +1,9 @@
-const Extension = ({ sets }) => {
+const Extension = ({ sets, setExtension }) => {
   console.log(sets);
   return (
     <div >
       {sets.map((item) => (
-        <button key={item.name}>{item.name}</button>
+        <button onClick={() => setExtension(item.name)} key={item.name}>{item.name}</button>
       ))}
     </div>
   );
