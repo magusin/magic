@@ -68,7 +68,7 @@ const Language = ({ setLanguage, language, availableLanguages }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
         {availableLanguages.map((l, i) => (
           <div key={l} className="col">
