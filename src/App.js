@@ -9,25 +9,48 @@ const App = () => {
   const [sets, setSets] = useState([]);
   const [cards, setCards] = useState([]);
   const [translatedCards, setTranslatedCards] = useState([]);
-  const [language, setLanguage] = useState(2);
+  const [language, setLanguage] = useState("French");
   const [page, setPage] = useState(1);
-
+  const [extension, setExtension] = useState("");
+  const [availableLanguages, setAvailableLanguages] = useState([]);
   useEffect(() => {
-    fetchCards().then((cards) => setCards(cards));
+    fetchCards(extension).then((cards) => setCards(cards));
     callSets().then((data) => setSets(data.sets));
-  }, []);
+  }, [extension]);
+
 
   useEffect(() => {
+    let availableLanguages = ["English"];
+      cards.filter((c, i) => !!c.foreignNames)
+      .filter((c, i) => i < page * 21 && i >= (page - 1) * 21)
+      .forEach((c, i) => {
+        for (let n in c.foreignNames) {
+          if (availableLanguages.indexOf(c.foreignNames[n].language) === -1) {
+            availableLanguages.push(c.foreignNames[n].language);
+          }
+        }
+      });
+console.log(availableLanguages);
+      setAvailableLanguages(availableLanguages);
+      
+    
     const tcs = cards
       .filter((c, i) => !!c.foreignNames)
       .filter((c, i) => i < page * 21 && i >= (page - 1) * 21)
       .map((c) => {
         const tc = JSON.parse(JSON.stringify(c));
-        if (language === 8) {
+        if (language === "English") {
           return tc;
         }
-        tc.name = c.foreignNames[language].name;
-        tc.imageUrl = c.foreignNames[language].imageUrl;
+        let languageIndex = 0;
+        while (
+          languageIndex < c.foreignNames.length &&
+          c.foreignNames[languageIndex].language !== language
+        ) {
+          languageIndex++;
+        }
+        tc.name = c.foreignNames[languageIndex].name;
+        tc.imageUrl = c.foreignNames[languageIndex].imageUrl;
         return tc;
       });
     setTranslatedCards(tcs);
@@ -46,10 +69,20 @@ const App = () => {
               language={language}
               setLanguage={setLanguage}
               translatedCards={translatedCards}
+              availableLanguages={availableLanguages}
             />
           </Route>
           <Route path="/sets">
-            <Extension sets={sets} />
+            <Extension 
+            sets={sets} 
+            setExtension={setExtension} 
+            page={page}
+            setPage={setPage}
+            language={language}
+            setLanguage={setLanguage}
+            translatedCards={translatedCards}
+            availableLanguages={availableLanguages}
+            />
           </Route>
         </Switch>
       </div>

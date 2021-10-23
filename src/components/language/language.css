@@ -3,11 +3,14 @@
 }
 
 .flag {
-    width: 100px;
-    height: 100px;
+    width: 50%;
+    height: 50%;
+}
+
+.col {
+    width: 20vh;
 }
 
 .active {
     background-color: grey;
 }
-
