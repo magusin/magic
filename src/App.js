@@ -73,7 +73,16 @@ console.log(availableLanguages);
             />
           </Route>
           <Route path="/sets">
-            <Extension sets={sets} setExtension={setExtension} />
+            <Extension 
+            sets={sets} 
+            setExtension={setExtension} 
+            page={page}
+            setPage={setPage}
+            language={language}
+            setLanguage={setLanguage}
+            translatedCards={translatedCards}
+            availableLanguages={availableLanguages}
+            />
           </Route>
         </Switch>
       </div>
