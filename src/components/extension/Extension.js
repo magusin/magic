@@ -1,5 +1,7 @@
 import Language from "../language/Language";
 
+import './extension.css'
+
 const Extension = ({ sets, 
   setExtension,
   translatedCards,
@@ -26,7 +28,7 @@ const Extension = ({ sets,
   return (
     <div>
     <div className="dropdown">
-      <label htmlFor="choose_sets">Recherche extension :</label>
+      <label htmlFor="choose_sets">Recherche extension : </label>
       <input
         list="sets"
         type="text"
