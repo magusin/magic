@@ -10,6 +10,7 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
 rel="stylesheet"
 />
+
 <!-- Google Fonts -->
 <link
 href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -54,6 +55,19 @@ rel="stylesheet"
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var js = "alert('B:' + this.id); return false;";
+      // create a function from the "js" string
+      var newclick = new Function(js);
+    
+      // clears onclick then sets click using jQuery
+      $("#anchor").attr('onclick', '').click(newclick);
+    });
+    if(isie)
+   tmpobject.setAttribute('onclick',(new Function(tmp.nextSibling.getAttributeNode('onclick').value)));
+else
+   $(tmpobject).attr('onclick',tmp.nextSibling.attributes[0].value); //this even supposes index
+    </script>
 
 </html>
