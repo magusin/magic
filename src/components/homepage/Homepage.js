@@ -11,7 +11,7 @@ const Homepage = ({
   return (
     <div>
       <Language setLanguage={setLanguage} language={language} availableLanguages={availableLanguages}/>
-      <div className="d-flex flex-wrap align-items-end">
+      <div className="d-flex flex-wrap align-items-end justify-content-center">
         {(translatedCards || []).map((item) => (
           <div key={item.name} className="p-2 card">
             <h2>{item.name}</h2>
